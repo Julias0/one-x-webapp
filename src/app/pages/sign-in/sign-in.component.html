@@ -1,0 +1,55 @@
+<div class="container" nz-row nzJustify="center" nzAlign="middle">
+  <div nz-col>
+    <div class="sign-in-container">
+      <h4 nz-typography class="sign-in-container--header">Sign In</h4>
+      <h5 nz-typography class="sign-in-container--sub-header">Please share your details below</h5>
+
+      <nz-alert class="sign-in-alert" *ngIf="errorMessage === errorMessageEnum.isPasswordWrong" nzType="error"
+        nzMessage="Oops! Incorrect password."></nz-alert>
+      <nz-alert class="sign-in-alert" *ngIf="errorMessage === errorMessageEnum.isNonExistingEmail" nzType="error"
+        nzMessage="Oops! User does not exist."></nz-alert>
+      <nz-alert class="sign-in-alert" *ngIf="errorMessage === errorMessageEnum.isAccountDisabled" nzType="error"
+        nzMessage="This email address is locked temporarily, as there were too many unsuccessful attempts recently. Please reset password.">
+      </nz-alert>
+      <nz-alert class="sign-in-alert" *ngIf="errorMessage === errorMessageEnum.isError500" nzType="error"
+        [nzMessage]="error500Template"></nz-alert>
+      <ng-template #error500Template>
+        <p>Something went wrong. Please contact your administrator or send a mail to <a
+            href='mailto: aiyushdhar@gmail.com'>aiyushdhar@gmail.com</a></p>
+      </ng-template>
+
+      <form nz-form [formGroup]="validateForm" class="login-form">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your email!">
+            <nz-input-group nzPrefixIcon="user">
+              <input type="email" nz-input formControlName="email" placeholder="email" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-input-group [nzSuffix]="suffixTemplate" nzPrefixIcon="lock">
+              <input [type]="passwordVisible ? 'text' : 'password'" formControlName="password" nz-input
+                placeholder="Password" />
+            </nz-input-group>
+            <ng-template #suffixTemplate>
+              <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                (click)="passwordVisible = !passwordVisible"></i>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <!-- <div nz-row class="login-form--btn-password">
+          <div nz-col [nzSpan]="12">
+            <a routerLink="reset_password" [queryParams]="{ user_email: validateForm.value.email }">Forgot
+              password</a>
+          </div>
+        </div> -->
+
+        <div class="login-form--buttons">
+          <button nz-button class="login-form--button" [nzType]="'primary'" [nzLoading]="isLoading" (click)="submitForm()">Log in</button>
+          <button nz-button class="login-form--button" nzType="default" routerLink="/sign_up">Sign Up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

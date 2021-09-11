@@ -1,0 +1,39 @@
+<button nz-button nzType="primary" (click)="startMeeting()">Start a Meeting</button>
+
+<ng-container *ngIf="meetings$|async as meetings">
+  <nz-table #basicTable [nzData]="meetings">
+    <thead>
+      <tr>
+        <th nzWidth="60px"></th>
+        <th>Name</th>
+        <th>Meeting Item Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of basicTable.data">
+        <tr>
+          <td [nzExpand]="expandSet.has(data._id||'')" (nzExpandChange)="onExpandChange(data._id, $event)"></td>
+          <td>{{data.name}}</td>
+          <td>{{data.meetingItems.length}}</td>
+        </tr>
+
+        <tr [nzExpand]="expandSet.has(data._id||'')">
+          <ng-container *ngFor="let meetingItem of data.meetingItems">
+            <nz-descriptions [nzTitle]="meetingItem.content">
+              <nz-descriptions-item nzTitle="Notes">
+                {{meetingItem.notes}}
+              </nz-descriptions-item>
+              <nz-descriptions-item nzTitle="Next Steps">
+                <ul>
+                  <li *ngFor="let step of meetingItem.nextSteps">
+                    {{step}}
+                  </li>
+                </ul>
+              </nz-descriptions-item>
+            </nz-descriptions>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </tbody>
+  </nz-table>
+</ng-container>

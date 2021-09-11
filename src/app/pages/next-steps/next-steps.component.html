@@ -1,0 +1,22 @@
+<h1>
+  Next Steps
+</h1>
+<ng-container *ngIf="nextSteps$|async as nextSteps">
+  <ul nz-list [nzDataSource]="nextSteps" nzBordered nzSize="large">
+    <li nz-list-item *ngFor="let step of nextSteps">
+      <ul nz-list-item-actions *ngIf="step.status === 'PENDING'">
+        <nz-list-item-action>
+          <a (click)="markComplete(step)">mark as complete</a>
+        </nz-list-item-action>
+      </ul>
+      <div>
+        <h5 nz-typography>
+          {{ step.content }}
+        </h5>
+        <div nz-typography nzType="secondary">
+          {{step.meeting.name}}
+        </div>
+      </div>
+    </li>
+  </ul>
+</ng-container>

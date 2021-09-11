@@ -1,0 +1,51 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  background-color: #0093E9;
+  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+}
+
+.sign-up-container {
+  border: 2px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px 0 rgb(0 0 0 / 15%);
+  background-color: #fff;
+  max-width: 460px;
+  min-width: 360px;
+  
+
+  &--header {
+      margin: 32px;
+      text-align: center;
+  }
+}
+
+::ng-deep nz-alert {
+  &.sign-up-alert{
+      margin-top: 0px;
+      margin-bottom: -20px;
+
+      .ant-alert-error{
+          width: 70%;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      .ant-alert-success{
+          width: 70%;
+          margin-left: auto;
+          margin-right: auto;
+      }
+  }
+}
+
+.signup-form {
+  min-width: 400px;
+  margin: 32px;
+
+  &--button {
+      display: block;
+      width: 70%;
+      margin-left: auto;
+      margin-right: auto;
+  }
+}

@@ -1,0 +1,87 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <img src="assets/images/onex.png" alt="logo">
+      <h1>One X</h1>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-menu-item routerLink="meetings">
+        <i nz-icon nzType="solution" nzTheme="outline"></i>
+        <span>Meetings</span>
+      </li>
+      <li nz-menu-item routerLink="next_steps">
+        <i nz-icon nzType="inbox" nzTheme="outline"></i>
+        <span>Next Steps</span>
+      </li>
+      <!-- <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a>Basic Form</a>
+          </li>
+        </ul>
+      </li> -->
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <nz-page-header-title>
+        {{title}}
+      </nz-page-header-title>
+      <nz-page-header-extra class="extra">
+        <!-- <ng-container>
+          <button class="btn-org-settings" nz-button nzType="link" nzPopoverPlacement="bottom"
+            routerLink="/settings/general">
+            <strong><i nz-icon [nzType]="'setting'" [nzTheme]="'outline'"></i> </strong></button>
+        </ng-container> -->
+        <!-- <ng-container *ngIf="nextSteps$|async as nextSteps">
+          <button class="btn-notifications" nz-button nzType="default" nzShape="circle" nz-popover
+            [nzPopoverContent]="contentTemplate2" nzPopoverPlacement="bottomRight">
+            <i nz-icon nzType="bell" nzTheme="outline"></i>
+          </button>
+        </ng-container>
+        <ng-template #contentTemplate2>
+          <ng-container *ngIf="nextSteps$|async as nextSteps">
+            <ng-container *ngFor="let step of nextSteps">
+              <div class="next-step-item" (click)="completeNextStep(step)">
+                <div nz-typography>
+                  {{step.content}}
+                </div>
+                <div nz-typography nzType="secondary">
+                  {{step.meeting.name}}
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-template> -->
+
+
+        <ng-container *ngIf="user$|async as user">
+          <button class="btn-profile-settings" nz-button nzType="link" nz-popover [nzPopoverContent]="contentTemplate"
+            nzPopoverPlacement="bottom">
+            <ng-container *ngIf="profilePic$|async as profilePic">
+              <nz-avatar [nzSrc]="profilePic"></nz-avatar>
+            </ng-container>
+            <i nz-icon class="down-icon">
+              <svg width="6" height="12" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.295 0.294922L3 2.58492L0.705 0.294922L0 0.999922L3 3.99992L6 0.999922L5.295 0.294922Z"
+                  fill="#323232" />
+              </svg>
+            </i>
+          </button>
+        </ng-container>
+        <ng-template #contentTemplate>
+          <div class="btn-logout" (click)="logout()">
+            <i nz-icon nzType="close-circle"></i>
+            Log out
+          </div>
+        </ng-template>
+      </nz-page-header-extra>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

@@ -1,0 +1,103 @@
+// FONT
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+// COLORS
+
+$brand-0: #2e2d6c;
+$brand-1: #53529e;
+$brand-2: #7372b8;
+$brand-3: #9797d1;
+$brand-4: #c0c0eb;
+$brand-5: #ebebff;
+
+$gray-0: #ffffff;
+$gray-1: #f5f5f5;
+$gray-2: #eaeaeb;
+$gray-3: #dfdfe2;
+$gray-4: #cccdd7;
+$gray-5: #c0c2ce;
+$gray-6: #a9acbc;
+$gray-7: #8c8fa6;
+$gray-8: #5a5d72;
+$gray-9: #4d506a;
+$gray-10: #414562;
+$gray-11: #363a59;
+$gray-12: #2c304e;
+$gray-13: #1c1f36;
+$gray-14: #161528;
+$gray-15: #0e0f1b;
+
+$gradient-0: linear-gradient(178.55deg, #a6aae0 -6.59%, #2e2d6c 111.9%);
+$gradient-1: linear-gradient(28.89deg, #2e2d6c 10.53%, #7071b3 104.29%);
+
+$red-0: #b71c1c;
+$red-1: #c62828;
+$red-2: #d32f2f;
+$red-3: #e53935;
+
+$orange-0: #e65100;
+$orange-1: #ef6c00;
+$orange-2: #f57c00;
+$orange-3: #fb8c00;
+
+$yellow-0: #f9a825;
+$yellow-1: #fbc02d;
+$yellow-2: #fdd835;
+$yellow-3: #ffeb3b;
+
+$green-0: #388e3c;
+$green-1: #43a047;
+$green-2: #4caf50;
+$green-3: #66bb6a;
+
+$purple-0: #4a148c;
+$purple-1: #6a1b9a;
+$purple-2: #7b1fa2;
+$purple-3: #8e24aa;
+
+$blue-0: #0d47a1;
+$blue-1: #1565c0;
+$blue-2: #1976d2;
+$blue-3: #1e88e5;
+
+// SYSTEM COLORS
+
+$header-text: $gray-14;
+$body-text: $gray-12;
+$label-text: $gray-8;
+$disabled: $gray-6;
+$border: $gray-3;
+$off-white: $gray-1;
+$white: $gray-0;
+
+$warning: $yellow-1;
+$info: $blue-3;
+$link: $blue-2;
+$success: $green-1;
+$error: $red-1;
+$brand: $brand-0;
+$brand-light: $brand-4;
+
+// CONSTANTS
+
+$border-radius-large: 10px;
+$border-radius-small: 5px;
+
+// MIXINS
+
+@mixin btn {
+    height: auto;
+    padding: 11px 14px;
+    border-radius: $border-radius-small;
+    font-weight: 700;
+    font-size: 14px;
+}
+@mixin required-mark {
+    display: inline-block;
+    margin-right: 4px;
+    color: #ff4d4f;
+    font-size: 14px;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+    content: "*";
+}

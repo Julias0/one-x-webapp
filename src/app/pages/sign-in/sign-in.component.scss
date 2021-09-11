@@ -1,0 +1,62 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+}
+
+.sign-in-container {
+  border: 2px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px 0 rgb(0 0 0 / 15%);
+  background-color: #fff;
+  max-width: 360px;
+  min-width: 360px;
+
+  &--header {
+    margin: 32px;
+    margin-bottom: 4px;
+  }
+
+  &--sub-header {
+    margin: 32px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+  }
+}
+
+::ng-deep nz-alert {
+  &.sign-in-alert {
+    margin-left: 32px;
+    margin-top: 0px;
+    margin-bottom: -20px;
+    margin-right: 24px;
+
+    .ant-alert-error {
+      background-color: #ff4d4f !important;
+      box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%), 0 1px 15px 0 rgb(0 0 0 / 10%);
+      border: none;
+    }
+    .ant-alert-message {
+      color: #fff !important;
+    }
+  }
+}
+
+.login-form {
+  min-width: 300px;
+  margin: 32px;
+
+  &--btn-password {
+    margin-bottom: 12px;
+  }
+
+  &--button {
+    width: 45%;
+  }
+
+  &--buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+}
