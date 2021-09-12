@@ -38,12 +38,12 @@
             </ng-template>
           </nz-form-control>
         </nz-form-item>
-        <!-- <div nz-row class="login-form--btn-password">
+        <div nz-row class="login-form--btn-password">
           <div nz-col [nzSpan]="12">
-            <a routerLink="reset_password" [queryParams]="{ user_email: validateForm.value.email }">Forgot
+            <a routerLink="/reset_password" [queryParams]="{ user_email: validateForm.value.email }">Forgot
               password</a>
           </div>
-        </div> -->
+        </div>
 
         <div class="login-form--buttons">
           <button nz-button class="login-form--button" [nzType]="'primary'" [nzLoading]="isLoading" (click)="submitForm()">Log in</button>

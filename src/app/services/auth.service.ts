@@ -45,6 +45,18 @@ export class AuthService {
     );
   }
 
+  requestResetPassword(email: string) {
+    return this.httpClient.post(environment.ROOT_URL + '/auth/reset_password', {
+      email
+    });
+  }
+
+  resetPassword(password: string) {
+    return this.httpClient.post(environment.ROOT_URL + '/auth/new_password', {
+      password
+    });
+  }
+
   logout() {
     this.tokenService.removeAccessToken();
   }

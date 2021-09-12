@@ -62,7 +62,12 @@ import { HttpConfigInterceptor } from './interceptors/auth.interceptor';
 import { NextStepsComponent } from './pages/next-steps/next-steps.component';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
-import { CreateMeetingComponent } from './components/create-meeting/create-meeting.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { NewPasswordComponent } from './pages/new-password/new-password.component';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { ChooseMeetingTemplateComponent } from './pages/choose-meeting-template/choose-meeting-template.component';
+import { PreviewTemplateComponent } from './pages/preview-template/preview-template.component';
+import { CreateMeetingComponent } from './pages/create-meeting/create-meeting.component';
 
 registerLocaleData(en);
 
@@ -74,6 +79,10 @@ registerLocaleData(en);
     LayoutComponent,
     MeetingsComponent,
     NextStepsComponent,
+    ResetPasswordComponent,
+    NewPasswordComponent,
+    ChooseMeetingTemplateComponent,
+    PreviewTemplateComponent,
     CreateMeetingComponent
   ],
   imports: [
@@ -129,7 +138,8 @@ registerLocaleData(en);
     NzSkeletonModule,
     NzAlertModule,
     NzTypographyModule,
-    NzDescriptionsModule
+    NzDescriptionsModule,
+    NzResultModule
   ],
   providers: [
     // {

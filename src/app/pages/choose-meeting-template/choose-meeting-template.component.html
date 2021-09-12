@@ -1,0 +1,17 @@
+<h1>
+  Choose a template
+</h1>
+<div class="template-container">
+  <ng-container *ngFor="let template of templates;let i = index">
+    <nz-card class="template-card" (mouseenter)="enter(i)" (mouseleave)="leave(i)">
+      <h3>
+        {{template.header}}
+      </h3>
+      <p>{{template.content}}</p>
+      <div class="card-ctas" *ngIf="hoverIndex === i">
+        <button (click)="selectTemplate(i)" nz-button nzType="primary">Apply Template</button>
+        <button (click)="previewTempalte(i)" nz-button nzType="default">Preview Template</button>
+      </div>
+    </nz-card>
+  </ng-container>
+</div>

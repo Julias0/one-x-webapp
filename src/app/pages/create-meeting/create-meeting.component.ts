@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { FormGroup, FormBuilder, FormArray, Validators, AbstractControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { noop } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { MeetingDto } from 'src/app/models/meeting.dto';
 import { MeetingsService } from 'src/app/services/meetings.service';
-import { CreateMeetingState } from './create-meeting.enum';
+import { PageDataService } from 'src/app/services/page-data.service';
 
 type Template = {
   header: string;
@@ -21,38 +21,37 @@ type Template = {
 })
 export class CreateMeetingComponent implements OnInit {
 
-  enter(i: number) {
-    this.hoverIndex = i;
-  }
-
-  leave(i: number) {
-    this.hoverIndex = null;
-  }
-
-  hoverIndex: number | null = null;
-  activeState: CreateMeetingState = CreateMeetingState.TEMPLATE;
-  templates: Template[] = [];
-  previewTemplate: Template | null = null;
-  selectedTemplate: Template | null = null;
-
   fg!: FormGroup;
+  activeTemplate?: Template;
 
   constructor(
     private meetingsService: MeetingsService,
     private fb: FormBuilder,
-    private modal: NzModalRef
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private pageDataService: PageDataService
   ) { }
-
+  
   get meetingItems() {
     return this.fg.controls['meetingItems'] as FormArray;
   }
 
   ngOnInit(): void {
-    this.templates = this.meetingsService.getTempates();
+    this.pageDataService.setTitle('Meeting Details');
+    const templates = this.meetingsService.getTempates();
     this.fg = this.fb.group({
       name: [, Validators.required],
       meetingItems: this.fb.array([])
     });
+
+    if (this.activatedRoute.snapshot.params.template_index) {
+      this.activeTemplate = templates[this.activatedRoute.snapshot.params.template_index];
+      this.selectTemplate(templates[this.activatedRoute.snapshot.params.template_index]);
+    }
+  }
+
+  goToTemplate() {
+    this.router.navigate(['/', 'app', 'preview', this.activatedRoute.snapshot.params.template_index]);
   }
 
   cast(a: AbstractControl) {
@@ -74,36 +73,12 @@ export class CreateMeetingComponent implements OnInit {
   }
 
   selectTemplate(selectedTemplate: Template) {
-    this.activeState = CreateMeetingState.DETAILS;
-    this.selectedTemplate = selectedTemplate;
-
     const todayDate = new Date();
     this.fg.controls.name.setValue(`${selectedTemplate.header}(${todayDate.getDate()}/${todayDate.getMonth()}/${todayDate.getFullYear()})`)
 
-    this.selectedTemplate.questions.forEach(question => {
+    selectedTemplate.questions.forEach(question => {
       this.addMeetingItem(question);
     });
-  }
-
-  previewTempalte(selectedTemplate: Template) {
-    this.activeState = CreateMeetingState.PREVIEW;
-    this.previewTemplate = selectedTemplate;
-  }
-
-  goBack() {
-    this.activeState = CreateMeetingState.TEMPLATE;
-    this.previewTemplate = null;
-    this.fg.reset();
-    this.meetingItems.clear();
-    this.selectedTemplate = null;
-  }
-
-  proceedWithPreviewedTemplate() {
-    if (this.previewTemplate) {
-      this.selectTemplate(this.previewTemplate);
-    }
-
-    this.previewTemplate = null;
   }
 
   convertFgToValue(formValue: any): MeetingDto {
@@ -125,13 +100,12 @@ export class CreateMeetingComponent implements OnInit {
       const newMeetingDto = this.convertFgToValue(this.fg.value);
       this.meetingsService.createMeeting(newMeetingDto).pipe(
         finalize(() => {
-          this.modal.destroy();
+          this.router.navigate(['/', 'app', 'meetings']);
         })
       ).subscribe(noop)
     } else {
       this.fg.markAllAsTouched();
     }
   }
-
 
 }

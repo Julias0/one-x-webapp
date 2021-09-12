@@ -1,4 +1,4 @@
-<button nz-button nzType="primary" (click)="startMeeting()">Start a Meeting</button>
+<button nz-button nzType="primary" routerLink="/app/templates">Start a Meeting</button>
 
 <ng-container *ngIf="meetings$|async as meetings">
   <nz-table #basicTable [nzData]="meetings">

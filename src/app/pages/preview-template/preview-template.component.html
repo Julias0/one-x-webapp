@@ -1,0 +1,33 @@
+<ng-container *ngIf="previewTemplate">
+  <nz-breadcrumb>
+    <nz-breadcrumb-item routerLink="../../templates">Templates</nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      {{previewTemplate.header}}
+    </nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <h1 class="preview-header">
+    {{previewTemplate.header}}
+  </h1>
+  <div>
+    Description - 
+  </div>
+  <p>
+    {{previewTemplate.longContent}}
+  </p>
+  <div>
+    Questions - 
+  </div>
+  <div>
+    <ul>
+      <li *ngFor="let question of previewTemplate.questions">
+        <h4>
+          {{question}}
+        </h4>
+      </li>
+    </ul>
+  </div>
+  <div class="action-btns">
+    <button nz-button nzType="default" (click)="goBack()">Go Back</button>
+    <button class="proceed-btn" nz-button nzType="primary" (click)="proceedWithPreviewedTemplate()">Proceed</button>
+  </div>
+</ng-container>

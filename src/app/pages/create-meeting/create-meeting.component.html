@@ -1,0 +1,57 @@
+<nz-breadcrumb *ngIf="activeTemplate">
+  <nz-breadcrumb-item routerLink="../../templates">Templates</nz-breadcrumb-item>
+  <nz-breadcrumb-item (click)="goToTemplate()">
+    {{activeTemplate.header}}
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    Meeting Details
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+<h1 class="details-header">
+  Please enter your meeting details
+  <button nz-button nzType="primary" (click)="submitForm()">Save Meeting Details</button>
+</h1>
+<ng-container *ngIf="fg">
+  <form nz-form [formGroup]="fg">
+    <div class="details-body">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Name</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Meeting name is required!">
+          <input nz-input formControlName="name" />
+        </nz-form-control>
+      </nz-form-item>
+      <ng-container formArrayName="meetingItems">
+        <ng-container *ngFor="let meetingItem of meetingItems.controls; let i = index">
+          <nz-divider></nz-divider>
+          <div [formGroup]="cast(meetingItem)">
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Question</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Question is required!">
+                <textarea rows="2" nz-input formControlName="question"></textarea>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24">Notes</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <textarea rows="4" nz-input formControlName="notes"></textarea>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24">Next Steps</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <nz-select formControlName="nextSteps" nzMode="tags" [nzTokenSeparators]="[',']"
+                  nzPlaceHolder="enter next steps separated by commas">
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </form>
+  <div class="bottom-bar">
+    <button nz-button nzType="primary" (click)="submitForm()">Save Meeting Details</button>
+  </div>
+</ng-container>
