@@ -19,7 +19,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
   ) { }
 
   secureUrl(url: string) {
-      if (url.indexOf('.onex.xyz') >= 0 ||
+      if (url.indexOf('onex') >= 0 ||
       url.indexOf('localhost') >= 0 ) {
       return true;
     }
