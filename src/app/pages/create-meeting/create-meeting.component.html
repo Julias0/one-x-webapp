@@ -20,6 +20,12 @@
           <input nz-input formControlName="name" />
         </nz-form-control>
       </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>With Whom</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" >
+          <input nz-input formControlName="withWhom" />
+        </nz-form-control>
+      </nz-form-item>
       <ng-container formArrayName="meetingItems">
         <ng-container *ngFor="let meetingItem of meetingItems.controls; let i = index">
           <nz-divider></nz-divider>

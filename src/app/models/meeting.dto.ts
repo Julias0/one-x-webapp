@@ -7,6 +7,7 @@ export interface MeetingItemDto {
 export interface MeetingDto {
   _id?: string;
   name: string;
-  owner?: string,
+  owner?: string;
+  withWhom: string;
   meetingItems: MeetingItemDto[];
 };

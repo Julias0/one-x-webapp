@@ -12,10 +12,14 @@
       <div>
         <h5 nz-typography>
           {{ step.content }}
+          <span *ngIf="step.meeting.withWhom" nz-typography nzType="secondary">
+            with {{step.meeting.withWhom}}
+          </span>
         </h5>
         <div nz-typography nzType="secondary">
           {{step.meeting.name}}
         </div>
+        
       </div>
     </li>
   </ul>

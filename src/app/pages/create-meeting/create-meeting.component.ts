@@ -41,6 +41,7 @@ export class CreateMeetingComponent implements OnInit {
     const templates = this.meetingsService.getTempates();
     this.fg = this.fb.group({
       name: [, Validators.required],
+      withWhom: [],
       meetingItems: this.fb.array([])
     });
 
@@ -84,6 +85,7 @@ export class CreateMeetingComponent implements OnInit {
   convertFgToValue(formValue: any): MeetingDto {
     const newMeeting: MeetingDto = {
       name: formValue.name,
+      withWhom: formValue.withWhom,
       meetingItems: formValue.meetingItems.map((meetingItem: { question: string, notes: string, nextSteps: string[] }) => ({
         content: meetingItem.question,
         notes: meetingItem.notes,
