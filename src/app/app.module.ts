@@ -68,6 +68,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 import { ChooseMeetingTemplateComponent } from './pages/choose-meeting-template/choose-meeting-template.component';
 import { PreviewTemplateComponent } from './pages/preview-template/preview-template.component';
 import { CreateMeetingComponent } from './pages/create-meeting/create-meeting.component';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 registerLocaleData(en);
 
@@ -139,7 +140,8 @@ registerLocaleData(en);
     NzAlertModule,
     NzTypographyModule,
     NzDescriptionsModule,
-    NzResultModule
+    NzResultModule,
+    NzSpaceModule
   ],
   providers: [
     // {

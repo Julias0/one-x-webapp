@@ -23,6 +23,11 @@ export class CreateMeetingComponent implements OnInit {
 
   fg!: FormGroup;
   activeTemplate?: Template;
+  formQuestionEditMap: { [index: number]: boolean } = {};
+
+  formNoteEditMap: { [index: number]: boolean } = {};
+
+  formNextStepsEditMap: { [index: number]: boolean } = {};
 
   constructor(
     private meetingsService: MeetingsService,
@@ -31,7 +36,7 @@ export class CreateMeetingComponent implements OnInit {
     private router: Router,
     private pageDataService: PageDataService
   ) { }
-  
+
   get meetingItems() {
     return this.fg.controls['meetingItems'] as FormArray;
   }
@@ -67,6 +72,26 @@ export class CreateMeetingComponent implements OnInit {
     });
 
     this.meetingItems.push(meetingItemFg);
+  }
+
+  addMeetingItemAtIndex(index: number): void {
+    const meetingItemFg = this.fb.group({
+      question: ['', Validators.required],
+      notes: [''],
+      nextSteps: []
+    });
+
+    this.meetingItems.insert(index, meetingItemFg);
+
+    const newMapValues:any = {};
+    Object.keys(this.formQuestionEditMap).forEach((key) => {
+      if(+key >= index) {
+        newMapValues[+key+1] = this.formQuestionEditMap[+key];
+      }
+    });
+
+    this.formQuestionEditMap = { ...this.formQuestionEditMap, ...newMapValues };
+    this.formQuestionEditMap[index] = true;
   }
 
   deleteMeetingItem(meetingItemIndex: number) {

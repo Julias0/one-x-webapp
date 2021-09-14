@@ -22,29 +22,57 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>With Whom</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" >
+        <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input formControlName="withWhom" />
         </nz-form-control>
       </nz-form-item>
       <ng-container formArrayName="meetingItems">
         <ng-container *ngFor="let meetingItem of meetingItems.controls; let i = index">
-          <nz-divider></nz-divider>
+          <nz-divider [nzText]="text" nzOrientation="right">
+            <ng-template #text>
+              <button (click)="addMeetingItemAtIndex(i)" nz-button nzType="link">
+                <i nz-icon nzType="plus"></i>
+                Add Question
+              </button>
+            </ng-template>
+          </nz-divider>
           <div [formGroup]="cast(meetingItem)">
-            <nz-form-item>
+            <div nz-row *ngIf="!formQuestionEditMap[i]">
+              <div [nzSm]="{span:14, offset:6}" nz-col>
+                {{meetingItem.value.question}}
+                <button (click)="formQuestionEditMap[i]=true" nz-button nzType="link"><i nz-icon
+                    nzType="edit"></i></button>
+              </div>
+            </div>
+            <nz-form-item *ngIf="formQuestionEditMap[i]">
               <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Question</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Question is required!">
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Question is required!" [nzValidateStatus]="(cast(meetingItem).controls.question.touched && !cast(meetingItem).controls.question.valid)?'error':'success'">
                 <textarea rows="2" nz-input formControlName="question"></textarea>
               </nz-form-control>
             </nz-form-item>
 
-            <nz-form-item>
+            <div class="action-buttons" nz-row *ngIf="!formNoteEditMap[i]||!formNextStepsEditMap[i]">
+              <div nz-col [nzSm]="{offset:6}">
+                <button [disabled]="formNoteEditMap[i]" (click)="formNoteEditMap[i]=true" nz-button nzType="default">
+                  Add Notes
+                </button>
+              </div>
+              <div nz-col [nzSm]="{offset: 1}">
+                <button [disabled]="formNextStepsEditMap[i]" (click)="formNextStepsEditMap[i]=true" nz-button
+                  nzType="default">
+                  Add Next Steps
+                </button>
+              </div>
+            </div>
+
+            <nz-form-item *ngIf="formNoteEditMap[i]">
               <nz-form-label [nzSm]="6" [nzXs]="24">Notes</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24">
                 <textarea rows="4" nz-input formControlName="notes"></textarea>
               </nz-form-control>
             </nz-form-item>
 
-            <nz-form-item>
+            <nz-form-item *ngIf="formNextStepsEditMap[i]">
               <nz-form-label [nzSm]="6" [nzXs]="24">Next Steps</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24">
                 <nz-select formControlName="nextSteps" nzMode="tags" [nzTokenSeparators]="[',']"
