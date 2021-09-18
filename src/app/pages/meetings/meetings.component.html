@@ -20,12 +20,20 @@
         </tr>
 
         <tr [nzExpand]="expandSet.has(data._id||'')">
+          <div *ngIf="data.notes">
+            <h4>
+              Notes
+            </h4>
+            <p>
+              {{data.notes}}
+            </p>
+          </div>
           <ng-container *ngFor="let meetingItem of data.meetingItems">
             <nz-descriptions [nzTitle]="meetingItem.content">
-              <nz-descriptions-item nzTitle="Notes">
+              <nz-descriptions-item nzTitle="Notes" *ngIf="meetingItem?.notes">
                 {{meetingItem.notes}}
               </nz-descriptions-item>
-              <nz-descriptions-item nzTitle="Next Steps">
+              <nz-descriptions-item nzTitle="Next Steps" *ngIf="meetingItem.nextSteps">
                 <ul>
                   <li *ngFor="let step of meetingItem.nextSteps">
                     {{step}}
@@ -33,6 +41,9 @@
                 </ul>
               </nz-descriptions-item>
             </nz-descriptions>
+            <p nz-typography nzType="secondary" *ngIf="!meetingItem?.notes && !meetingItem.nextSteps">
+              no notes or next steps
+            </p>
           </ng-container>
         </tr>
       </ng-container>

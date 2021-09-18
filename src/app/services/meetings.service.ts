@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { MeetingDto } from '../models/meeting.dto';
 
@@ -14,6 +15,10 @@ export class MeetingsService {
 
   getMeetings() {
     return this.httpClient.get<MeetingDto[]>(environment.ROOT_URL + '/meeting');
+  }
+
+  getMeetingWithWhoms(): Observable<string[]> {
+    return this.httpClient.get<string[]>(environment.ROOT_URL + '/meeting/with_whom')
   }
 
   createMeeting(meeting: MeetingDto) {

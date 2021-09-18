@@ -10,4 +10,5 @@ export interface MeetingDto {
   owner?: string;
   withWhom: string;
   meetingItems: MeetingItemDto[];
+  notes?: string;
 };

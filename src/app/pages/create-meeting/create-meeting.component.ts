@@ -29,6 +29,9 @@ export class CreateMeetingComponent implements OnInit {
 
   formNextStepsEditMap: { [index: number]: boolean } = {};
 
+  options: string[] = [];
+  withWhomOptions: string[] = [];
+
   constructor(
     private meetingsService: MeetingsService,
     private fb: FormBuilder,
@@ -47,6 +50,7 @@ export class CreateMeetingComponent implements OnInit {
     this.fg = this.fb.group({
       name: [, Validators.required],
       withWhom: [],
+      notes: [],
       meetingItems: this.fb.array([])
     });
 
@@ -54,6 +58,9 @@ export class CreateMeetingComponent implements OnInit {
       this.activeTemplate = templates[this.activatedRoute.snapshot.params.template_index];
       this.selectTemplate(templates[this.activatedRoute.snapshot.params.template_index]);
     }
+    this.meetingsService.getMeetingWithWhoms().subscribe(withWhomOptions => {
+      this.withWhomOptions = withWhomOptions;
+    });
   }
 
   goToTemplate() {
@@ -111,6 +118,7 @@ export class CreateMeetingComponent implements OnInit {
     const newMeeting: MeetingDto = {
       name: formValue.name,
       withWhom: formValue.withWhom,
+      notes: formValue.notes,
       meetingItems: formValue.meetingItems.map((meetingItem: { question: string, notes: string, nextSteps: string[] }) => ({
         content: meetingItem.question,
         notes: meetingItem.notes,
@@ -133,6 +141,11 @@ export class CreateMeetingComponent implements OnInit {
     } else {
       this.fg.markAllAsTouched();
     }
+  }
+
+  onInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.options = this.withWhomOptions.filter(option => option.toLowerCase().includes(value.toLowerCase()));
   }
 
 }
