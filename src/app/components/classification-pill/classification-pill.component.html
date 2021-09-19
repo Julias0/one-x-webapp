@@ -1,0 +1,18 @@
+<span *ngIf="questionClassification">
+  <ng-container [ngSwitch]="questionClassification">
+    <nz-tag [nzColor]="'lime'" *ngSwitchCase="'growth and development'">
+      Growth & Development
+    </nz-tag>
+    <nz-tag [nzColor]="'blue'" *ngSwitchCase="'communication'">
+      Communication
+    </nz-tag>
+    <nz-tag [nzColor]="'red'" *ngSwitchCase="'challenges and roadblocks'">
+      Challenges & Roadblocks
+    </nz-tag>
+    <nz-tag [nzColor]="'purple'" *ngSwitchCase="'feedback'">
+      Feedback
+    </nz-tag>
+    <nz-tag *ngSwitchDefault>
+    </nz-tag>
+  </ng-container>
+</span>

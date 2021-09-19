@@ -8,20 +8,26 @@
   <h1 class="preview-header">
     {{previewTemplate.header}}
   </h1>
-  <div>
-    Description - 
-  </div>
+  <h3>
+    Description -
+  </h3>
   <p>
     {{previewTemplate.longContent}}
   </p>
-  <div>
-    Questions - 
+  <div *ngIf="!loadingAnalysis && questionClassificationsAggregate && questionClassificationsAggregate.length">
+    <app-classification-chart [questionClassificationsAggregate]="questionClassificationsAggregate"></app-classification-chart>
   </div>
+  <h3>
+    Questions -
+  </h3>
+  <p nz-typography nzType="secondary" *ngIf="loadingAnalysis">Loading question analysis...</p>
   <div>
     <ul>
-      <li *ngFor="let question of previewTemplate.questions">
+      <li *ngFor="let question of previewTemplate.questions;let i = index">
         <h4>
           {{question}}
+          <app-classification-pill [questionClassification]="questionClassifications[i]?.label">
+          </app-classification-pill>
         </h4>
       </li>
     </ul>

@@ -69,6 +69,10 @@ import { ChooseMeetingTemplateComponent } from './pages/choose-meeting-template/
 import { PreviewTemplateComponent } from './pages/preview-template/preview-template.component';
 import { CreateMeetingComponent } from './pages/create-meeting/create-meeting.component';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { ClassificationPillComponent } from './components/classification-pill/classification-pill.component';
+import { QuestionClassificationComponent } from './components/question-classification/question-classification.component';
+import { ChartsModule } from 'ng2-charts';
+import { ClassificationChartComponent } from './components/classification-chart/classification-chart.component';
 
 registerLocaleData(en);
 
@@ -84,7 +88,10 @@ registerLocaleData(en);
     NewPasswordComponent,
     ChooseMeetingTemplateComponent,
     PreviewTemplateComponent,
-    CreateMeetingComponent
+    CreateMeetingComponent,
+    ClassificationPillComponent,
+    QuestionClassificationComponent,
+    ClassificationChartComponent
   ],
   imports: [
     BrowserModule,
@@ -141,7 +148,8 @@ registerLocaleData(en);
     NzTypographyModule,
     NzDescriptionsModule,
     NzResultModule,
-    NzSpaceModule
+    NzSpaceModule,
+    ChartsModule
   ],
   providers: [
     // {

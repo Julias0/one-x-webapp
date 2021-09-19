@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 import md5 from 'blueimp-md5';
+import { Cacheable } from 'ts-cacheable';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class UserService {
     private httpClient: HttpClient
   ) { }
 
+  @Cacheable()
   getMyUserDetails() {
     return this.httpClient.get<User>(environment.ROOT_URL + '/me');
   }

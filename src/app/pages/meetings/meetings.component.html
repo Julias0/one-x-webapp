@@ -29,18 +29,30 @@
             </p>
           </div>
           <ng-container *ngFor="let meetingItem of data.meetingItems">
-            <nz-descriptions [nzTitle]="meetingItem.content">
-              <nz-descriptions-item nzTitle="Notes" *ngIf="meetingItem?.notes">
+            <h3>
+              {{meetingItem.content}}
+              <app-question-classification *ngIf="expandSet.has(data._id||'')" [question]="meetingItem.content"></app-question-classification>
+            </h3>
+            <div *ngIf="meetingItem.notes">
+              <h4>
+                Notes
+              </h4>
+              <p>
                 {{meetingItem.notes}}
-              </nz-descriptions-item>
-              <nz-descriptions-item nzTitle="Next Steps" *ngIf="meetingItem.nextSteps">
+              </p>
+            </div>
+            <div *ngIf="meetingItem.nextSteps">
+              <h4>
+                Next Steps
+              </h4>
+              <div>
                 <ul>
                   <li *ngFor="let step of meetingItem.nextSteps">
                     {{step}}
                   </li>
                 </ul>
-              </nz-descriptions-item>
-            </nz-descriptions>
+              </div>
+            </div>
             <p nz-typography nzType="secondary" *ngIf="!meetingItem?.notes && !meetingItem.nextSteps">
               no notes or next steps
             </p>
