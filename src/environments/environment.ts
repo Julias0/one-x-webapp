@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  ROOT_URL: 'http://localhost:80'
+  ROOT_URL: 'https://onex-api.diydashboard.xyz'
 };
 
 /*

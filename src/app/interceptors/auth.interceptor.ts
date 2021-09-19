@@ -11,11 +11,13 @@ import {
 import { Observable, throwError, from, forkJoin, of, iif } from 'rxjs';
 import { map, catchError, switchMap, mergeMap, concatMap } from 'rxjs/operators';
 import { TokenService } from '../services/token.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
   constructor(
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private authService: AuthService,
   ) { }
 
   secureUrl(url: string) {
@@ -43,6 +45,14 @@ export class HttpConfigInterceptor implements HttpInterceptor {
           }
 
           return next.handle(request);
+        }),
+        catchError(err => {
+          console.log(err);
+          if (err.status === 401) {
+            this.authService.logout();
+          }
+
+          return throwError(err);
         })
       );
   }
