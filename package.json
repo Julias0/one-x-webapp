@@ -20,6 +20,7 @@
     "@angular/router": "~12.2.0",
     "@auth0/angular-jwt": "^5.0.2",
     "blueimp-md5": "^2.18.0",
+    "chart.js": "^2.9.4",
     "ng-zorro-antd": "^12.0.1",
     "ng2-charts": "^2.4.3",
     "rxjs": "~6.6.0",
